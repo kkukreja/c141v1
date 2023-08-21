@@ -3,7 +3,7 @@ import csv
 
 all_movies = []
 
-with open('movies.csv',encoding='utf-8') as f:
+with open('movies1.csv', encoding='utf8') as f:
     reader = csv.reader(f)
     data = list(reader)
     all_movies = data[1:]
@@ -21,10 +21,18 @@ def get_movie():
         "status": "success"
     })
 
+@app.route("/liked-movie")
+def get_liked_movie():
+    return jsonify({
+        "data": liked_movies,
+        "status": "success"
+    })
+
 @app.route("/liked-movie", methods=["POST"])
 def liked_movie():
+    # all_movies = data[1:]
     movie = all_movies[0]
-    all_movies = all_movies[1:]
+    # all_movies = all_movies[1:]
     liked_movies.append(movie)
     return jsonify({
         "status": "success"
